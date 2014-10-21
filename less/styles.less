@@ -1,0 +1,233 @@
+/* ==========================================================================
+   Main Theme Styles
+   Theme Name: Boilerplate
+   Author: Author name
+   Version: 1.0
+   ========================================================================== */
+
+/* ==========================================================================
+   Mixins
+
+   We provide some very useful mixins to get you started with theme development
+   They can also be used outside of your theme so it's sort of our treat to you
+   ========================================================================== */
+
+@import 'mixins.less';
+@import 'palette.less';
+@import 'font-face.less';
+
+
+/* ==========================================================================
+   Author's custom styles
+   Local Variables/Overrides
+   -------------------------
+   If you want to set a document-wide variable
+   or override anything, you can place it here,
+   or not, entirely your call.
+   ========================================================================== */
+
+@body-font-size       : 16px;               // Browser-default font size for rem-unit values
+                                            // Not familiar with REM units? check out these resources!
+                                            // Provider of remixings.less where - https://coderwall.com/p/hvwebq
+                                            // http://css-tricks.com/theres-more-to-the-css-rem-unit-than-font-sizing/
+                                            // http://jsbin.com/acide4/8
+                                            // http://techtime.getharvest.com/blog/in-defense-of-rem-units
+
+@body-font-family     : "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+@body-padding         : 60px;               // Global unified body padding to use math on for a scalable layout
+
+@body-color           : @grey-90;           // Body font colour
+@body-link-color      : @grey-85;           // Body link colour
+
+@base-line-height     : 1.625;              // Unitless universal line-height for document
+                                            // http://meyerweb.com/eric/thoughts/2006/02/08/unitless-line-heights/
+@heading-line-height  : 1.4;                // A smaller line-height for the headers as stacked headers
+                                            // would have a tonne of unused space between each
+
+/* ==========================================================================
+   Baseline styles
+
+   These can be modified to suit the theme, but mostly here for best-practices
+   ========================================================================== */
+
+// Set viewport to device width for responsive view
+@-webkit-viewport { width: device-width; zoom: 1.0; }
+@-moz-viewport    { width: device-width; zoom: 1.0; }
+@-ms-viewport     { width: device-width; zoom: 1.0; }
+@-o-viewport      { width: device-width; zoom: 1.0; }
+@viewport         { width: device-width; zoom: 1.0; }
+
+*,
+*:before,
+*:after {
+  .box-sizing(border-box);            // Don't hate the universal selector!
+                                      // Set box-sizing: border-box; on every element for easy-as-hell padding math
+                                      // http://paulirish.com/2012/box-sizing-border-box-ftw/
+  background-repeat: no-repeat;       // Set all images to no-repeat so you don't have to on individual elements
+}
+
+html {
+  -webkit-text-size-adjust: 100%;     // These are here to keep iOS Safari and Android webkit
+      -ms-text-size-adjust: 100%;     // browsers from resizing text when zooming
+}
+
+body {
+  font-size: 100%;                    // Set root font-size for REM units
+  font-family: @body-font-family;
+  line-height: @base-line-height;
+  color: @body-color;
+  .retina-font-weight;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  .margin((@base-line-height / 2px) 0);
+  color: @body-color;
+  line-height: @heading-line-height;
+
+  a {
+    font-weight: inherit;
+  }
+
+  small {
+    color: @grey-55;
+    font-weight: normal;
+    font-size: 70%;
+  }
+}
+
+// These values are based on Twitter Bootstrap values for headings
+// https://github.com/twitter/bootstrap/blob/master/less/type.less#L77
+h1 { .font-size(38px); }
+h2 { .font-size(32px); }
+h3 { .font-size(24px); }
+h4 { .font-size(18px); }
+h5 { .font-size(16px); }
+h6 { .font-size(12px); }
+
+p {
+  margin: 0;
+  .margin-bottom(20px);
+
+  img {
+    margin: 0;
+  }
+}
+
+// Allow images to stretch to the max width of 100% of it's container
+// Great for responsive image scaling
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  .transition();
+  .no-flick;
+  color: @body-link-color;
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: lighten(@body-link-color, 15%);
+    text-decoration: underline;
+  }
+}
+
+ul,
+ol {
+  .margin-left(40px);
+  padding: 0;
+}
+
+blockquote {
+  margin: 0;
+  .margin-left(20px);
+  .margin-bottom(20px);
+  .padding(9px 20px);
+  border-left: solid @grey-25;
+  .border-left-width(4px);
+  .font-size(16px);
+  color: @grey-55;
+  font-style: italic;
+
+  cite {
+    display: block;
+    .font-size(12px);
+    color: @grey-75;
+
+    &:before {
+      content: "\2014 \0020";
+    }
+
+    a,
+    a:visited,
+    a:visited {
+      color: @grey-75;
+    }
+  }
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+  color: @grey-85;
+}
+
+small {
+  font-size: 80%;
+}
+
+hr {
+  border-width: 0;
+  border: solid @grey-20;
+  .border-top-width(1px);
+  .margin(10px 0);
+  height: 0;
+  .clearfix;
+}
+
+// Provides a nice rounded avatar image with a drop-shadow effect
+.avatar {
+  a,
+  img {
+    .border-radius(50%);
+    margin: auto;
+    padding: 0;
+  }
+
+  a {
+    display: inline-block;
+    .size(96px);
+    .box-shadow(0 2px 3px rgba(0,0,0,0.25));
+    border: solid @white;
+    .border-width(2px);
+  }
+
+  img {
+    .size(92px);
+  }
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+
+
+
+/* ==========================================================================
+   Import media queries,
+   Anything else necessary after main document styles
+   ========================================================================== */
+@import 'media-queries';

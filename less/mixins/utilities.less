@@ -1,0 +1,150 @@
+// Basic utilities
+.hide           { display: none; }
+.show           { display: block; }
+.invisible      { visibility: hidden; }
+
+.pull-left      { float: left; }
+.pull-right     { float: right; }
+.align-center   { text-align: center; }
+
+.text-left      { text-align: left; }
+.text-center    { text-align: center; }
+.text-right     { text-align: right; }
+.text-justify   { text-align: justify; }
+
+.no-underline   { text-decoration: none; }
+.uppercase      { text-transform: uppercase; }
+.lowercase      { text-transform: lowercase; }
+
+// Browser Ver. > IE8
+// http://css-tricks.com/snippets/css/clear-fix/
+.clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
+// Prevent flicker on iOS devices
+// http://stackoverflow.com/questions/3461441/prevent-flicker-on-webkit-transition-of-webkit-transform
+.no-flick     { -webkit-transform:translate3d(0,0,0); }
+
+.block {
+  display: block;
+  .clearfix;
+}
+
+// Hide from screenreaders and browsers
+// Credit: HTML5 Boilerplate
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+// Best image replacement so far
+// http://www.dotnetnuke.com/Resources/Blogs/EntryId/3536/New-CSS-Image-Replacement-Technique-to-Improve-Performance.aspx
+.hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// Ellipsis CSS text truncation
+// To use: ensure explicit width is set on element,
+//     width or max-width is ok to use
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+
+// Responsive media - iframes, GMaps, etc.
+.responsive-media {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+
+  object,
+  embed,
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Responsive retina image mixin
+// https://gist.github.com/brandonb927/3874012
+.image-2x(@image, @width, @height, @repeat: no-repeat) {
+  @filename  : ~`/(.*)\.(jpg|jpeg|png|gif)/.exec(@{image})[1]`;
+  @extension : ~`/(.*)\.(jpg|jpeg|png|gif)/.exec(@{image})[2]`;
+  background-image: ~`"url(@{filename}@2x.@{extension})"`;
+  background-repeat: @repeat;
+
+  @media print, screen,
+    (-webkit-min-device-pixel-ratio: 1.25),
+    (min-device-pixel-ratio: 1.25),
+    (min-resolution: 120dpi) {
+      /* on retina, use image that's scaled by 2 */
+      background-image: ~`"url(@{filename}@2x.@{extension})"`;
+      background-size: @width @height;
+  }
+}
+
+
+// Apply to any element you wish to have retina-ready HiDPI type
+.retina-font-weight(@ratio: 1.25) {
+  @dpi : @ratio * 96;
+  font-weight: normal;
+
+  @media only screen and (-webkit-min-device-pixel-ratio: @ratio),
+    and (min-device-pixel-ratio: @ratio),
+    and (min-resolution: ~'@{dpi}dpi') {
+    font-weight: 300;
+  }
+}
+
+/**
+ * Visibility Utilites
+ * NOTE: Only include these if you aren't using Bootstrap!
+ */
+
+// Visibility utilities - From Bootstrap - https://twitter.github.io/bootstrap
+// For desktops
+.visible-phone     { display: none !important; }
+.visible-tablet    { display: none !important; }
+.hidden-phone      { }
+.hidden-tablet     { }
+.hidden-desktop    { display: none !important; }
+.visible-desktop   { display: inherit !important; }
+
+// Tablets & small desktops only
+@media (min-width: 48em) and (max-width: 59.9375em) {
+  // Hide everything else
+  .hidden-desktop   { display: inherit !important; }
+  .visible-desktop  { display: none !important ; }
+  // Show
+  .visible-tablet   { display: inherit !important; }
+  // Hide
+  .hidden-tablet    { display: none !important; }
+}
+
+// Phones only
+@media (max-width: 47.9375em) {
+  // Hide everything else
+  .hidden-desktop   { display: inherit !important; }
+  .visible-desktop  { display: none !important; }
+  // Show
+  .visible-phone    { display: inherit !important; } // Use inherit to restore previous behavior
+  // Hide
+  .hidden-phone     { display: none !important; }
+}
